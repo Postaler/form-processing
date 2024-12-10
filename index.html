@@ -39,6 +39,23 @@
         <label for="Phone">Phone</label><br>
         <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" required>
       </div>
+      <div>
+        <label for="Email">Email</label><br>
+        <input type="email" name="Email" id="Email" placeholder="Email" required autofocus>
+      </div>
+      <div>
+        <label for="Address">Adress</label><br>
+        <input type="text" name="Adress" id="Adress" placeholder="Adress" required>
+      </div>
+      <div>
+        <label for="City">City</label><br>
+        <input type="text" name="City" id="City" placeholder="City" required>
+      </div>
+      <div>
+        <label for="PostalCode">Postal Code</label><br>
+        <input type="text" name="Postal_Code" id="PostalCode" placeholder="Postal Code" required>
+      </div>
+
 
       <div>
 
@@ -150,6 +167,15 @@
   </main>
   <script src="js/main.js"></script> 
   <script>
+    function titleCase(str){
+      str = str.split(" ");
+      for(let x = 0; x<str.length; x++){
+      
+          str[x] = str[x].charAt(0).toUpperCase() + str[x].slice(1).toLowerCase();
+      }
+    str = str.join(" ");
+      return str;
+    }
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -158,14 +184,34 @@
       let myOutput = `<div id="container">`;
 
       urlParams.forEach(function(value,key){
-
         key = key.split("_").join(" ");
+
+       
+        switch(key){
+          case "First Name":
+          case "Last Name":
+          case "City":
+          case "Address":
+            value = titleCase(value);
+          break
+
+       }
+       
+       
+       
+        //title.case.everything?
+        value = titleCase(value);
+       
         myOutput += `<p>${key}: ${value}</p>`;
       });
       myOutput += `<p><a href="index.html">CLEAR</a></p>`; 
       myOutput += `</div>`;
       document.querySelector("#output").innerHTML = myOutput;
     }
+    
+    
+ 
+
   </script>  
  </body>
 </html>
